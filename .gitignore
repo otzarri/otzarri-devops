@@ -1,0 +1,2 @@
+/scripts/*.cfg
+!/scripts/*.sample.cfg
