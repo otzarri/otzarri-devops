@@ -23,7 +23,6 @@ Tools and configuration files are in [scripts](scripts) directory.
 | Tool                                | Description                                                                     |
 | ----------------------------------- | ------------------------------------------------------------------------------- |
 | [gitlab-init](scripts/gitlab-init)  | Initializes git into current directory and pushes it to a new project in GitLab |
-| [groovy-pe](scripts/groovy-pre)     | Creates a portable Groovy environment                                           |
 
 
 ## Third-party
