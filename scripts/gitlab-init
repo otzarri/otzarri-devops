@@ -23,4 +23,11 @@ gitlab-init() {
 }
 
 . ${_wd}/${_cf}
+
+ns=""
+while [[ "${ns}" == "" ]]; do
+    read -p "Select namespace [${def_ns}]: " ns
+    if [[ "${ns}" == "" ]]; then ns="${def_ns}"; fi
+done
+
 gitlab-init "${host}" "${ns}" "${user}" "${email}"
