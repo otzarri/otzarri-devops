@@ -1,14 +1,19 @@
 #!/usr/bin/env bash
-_wd="$(realpath $(dirname ${0}))"  # Script's working dir
 
+_wd="$(realpath $(dirname ${0}))"  # Script's working dir
 bin_dir="${HOME}/.local/bin"
 
-echo -e "Installing OST\n"
+echo -e "\nInstalling OST"
+
+if [ ! -d "${bin_dir}" ]; then
+    mkdir -p ${bin_dir};
+    echo "[MKDIR] ${bin_dir}" 
+fi
 
 for filepath in ${_wd}/scripts/*; do
     if [[ "${filepath}" != */ost-* ]]; then
 	dst="${bin_dir}/$(basename ${filepath})"
-	echo "[COPY] ${filepath}  ->  ${dst}"
+	echo "[COPY] ${filepath}  =>  ${dst}"
         cp ${filepath} ${dst}
 	
 	if [[ "${dst}" == /*.cfg ]]; then
