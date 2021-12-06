@@ -3,14 +3,13 @@
 ## Installation (AchLinux/Manjaro, Debian/Ubuntu)
 
 ```
-$ curl -s https://gitlab.com/josebamartos/ost/-/blob/master/installer/remote-install.sh | bash
+$ curl -s https://gitlab.com/josebamartos/ost/-/raw/master/installer/remote-install.sh | bash
 ```
 
 ## Uninstallation
 
 ```
-$ chmod +x uninstall.sh
-$ ./uninstall.sh
+$ ost-uninstall.sh
 ```
 
 ## Tools
