@@ -1,36 +1,69 @@
 #!/usr/bin/env bash
 
-_wd="$(realpath $(dirname ${0}))"  # Script's working dir
-bin_src="${_wd}/../bin"
+rd=$(realpath $(dirname "${0}")/..)  # Root dir
+bin_src="${rd}/bin"
 bin_dst="${HOME}/.local/bin"
-cfg_src="${_wd}/../config"
+cfg_src="${rd}/config"
 cfg_dst="${HOME}/.config/ost"
+file_list="${cfg_dst}/.installed-files.list"
+
+check_dir() {
+    dir="${1}"
+    action="${2}"
+
+    if [[ ! -d "${dir}" ]]; then
+        echo "[WARNING] Missing ${dir} directory"
+        if [[ "${action}" == "create" ]]; then
+            echo "[INFO] Creating ${dir} directory"
+            mkdir "${dir}"
+        fi
+    fi
+}
+
+copy_file() {
+    src_file="${1}"
+    dst_file="${2}"
+    overwrite="${3}"
+    file_path=$(dirname "${dst_file}")
+
+    if [[ -f "${dst_file}" && \
+        "${file_path}" == "${cfg_dst}" && \
+        "${overwrite}" == "n" \
+    ]]; then
+        echo "[OMIT] ${dst_file}"
+    else
+        echo "[COPY] ${src_file}  =>  ${dst_file}"
+        cp -rp -f "${src_file}" "${dst_file}"
+        if ! grep -Fxq "${dst_file}" "${file_list}" 2> /dev/null; then
+            echo "${dst_file}" >> "${file_list}"
+        fi
+    fi
+}
+
+function copy_dir_content() {
+    src_dir="${1}"
+    dst_dir="${2}"
+    overwrite="${3}"
+
+    for src_file in "${src_dir}"/*; do
+        dst_file="${dst_dir}/$(basename ${src_file})"
+        copy_file "${src_file}" "${dst_file}" "${overwrite}"
+    done
+}
 
 echo -e "\n[INFO] Installing OST"
 
-if [[ ! -d "${bin_dst}" ]]; then
-    echo "[WARNING] Missing ${bin_dst} directory"
-    echo "[INFO] Creating ${bin_dst} directory"
-    mkdir "${bin_dst}"
+if [[ -f ${file_list} ]]; then
+    if grep -Fq "${cfg_dst}" "${file_list}" 2> /dev/null; then
+        while [[ ! "${rm_cfg}" =~ ^(n|y)$ ]]; do
+            read -r -p "Overwrite config files? (y/n): " rm_cfg
+        done
+    fi
 fi
 
-for file_src in "${bin_src}"/*; do
-    file_dst="${bin_dst}/$(basename ${file_src})"
-    echo "[COPY] ${file_src}  =>  ${file_dst}"
-    cp -rp "${file_src}" "${file_dst}"
-    chmod +x "${file_dst}"
-done
-
-if [[ ! -d "${cfg_dst}" ]]; then
-    echo "[WARNING] Missing ${cfg_dst} directory"
-    echo "[INFO] Creating ${cfg_dst} directory"
-    mkdir "${cfg_dst}"
-fi
-
-for file_src in "${cfg_src}"/*; do
-    file_dst="${cfg_dst}/$(basename ${file_src})"
-    echo "[COPY] ${file_src}  =>  ${file_dst}"
-    cp -rp "${file_src}" "${file_dst}"
-done
-
+check_dir "${bin_dst}" "create"
+check_dir "${cfg_dst}" "create"
+copy_dir_content "${bin_src}" "${bin_dst}" "y"
+copy_dir_content "${cfg_src}" "${cfg_dst}" "${rm_cfg}"
+copy_file "${rd}/installer/uninstall.sh" "${bin_dst}/ost-uninstall" "y"
 echo -e "[INFO] Installation completed\n"
