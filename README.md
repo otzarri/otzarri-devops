@@ -3,7 +3,7 @@
 ## Installation (AchLinux/Manjaro, Debian/Ubuntu)
 
 ```
-$ curl -s https://gitlab.com/josebamartos/ost/-/raw/master/installer/remote-install.sh | bash
+$ bash -c "$(curl -s https://gitlab.com/josebamartos/ost/-/raw/master/installer/remote-install.sh)"
 ```
 
 ## Uninstallation
