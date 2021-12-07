@@ -1,6 +1,16 @@
-# OST (Otzarri System Tools)
+# otzarri-devops
 
-## Installation (AchLinux/Manjaro, Debian/Ubuntu)
+Development and system administration tool set.
+
+## Remote interactive installation (AchLinux/Manjaro, Debian/Ubuntu)
+
+```
+$ bash -c "$(curl -s https://gitlab.com/josebamartos/ost/-/raw/master/installer/remote-install.sh)"
+```
+
+## Remote unattended installation (AchLinux/Manjaro, Debian/Ubuntu)
+
+To force the script to overwrite the existing configuration files:
 
 ```
 $ bash -c "$(curl -s https://gitlab.com/josebamartos/ost/-/raw/master/installer/remote-install.sh)"
@@ -9,7 +19,7 @@ $ bash -c "$(curl -s https://gitlab.com/josebamartos/ost/-/raw/master/installer/
 ## Uninstallation
 
 ```
-$ ost-uninstall.sh
+$ otzarri-devops-uninstall
 ```
 
 ## Tools

@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
 action="${1}"
-echo action
-echo $action
 
 rd=$(realpath $(dirname "${0}")/..)  # Root dir
 bin_src="${rd}/bin"
 bin_dst="${HOME}/.local/bin"
 cfg_src="${rd}/config"
-cfg_dst="${HOME}/.config/ost"
+cfg_dst="${HOME}/.config/otzarri-devops"
 file_list="${cfg_dst}/.installed-files.list"
 
 if [[ "${action}" == 'overwrite-config' ]]; then rm_cfg='y'; fi
