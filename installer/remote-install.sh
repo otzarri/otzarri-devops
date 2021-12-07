@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 action="${1}"
+echo action
+echo $action
 
 echo -e "\n[INFO] Cloning otzarri-devops"
 cur_dir=$(pwd)

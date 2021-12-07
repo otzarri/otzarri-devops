@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 action="${1}"
+echo action
+echo $action
 
 rd=$(realpath $(dirname "${0}")/..)  # Root dir
 bin_src="${rd}/bin"
