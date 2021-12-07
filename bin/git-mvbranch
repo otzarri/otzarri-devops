@@ -13,6 +13,7 @@ while [[ -z "${new_branch}" ]]; do
 done
 
 echo "Branch \"${old_branch}\" will be renamed to \"${new_branch}"\"
+echo "This change will be applied to both local and remote branches"
 read -n 1 -s -r -p "Press any key to continue or Ctl+c to quit"; echo -e "\n"
 
 git branch -m "${new_branch}" && \
