@@ -5,7 +5,7 @@ Development and system administration tool set.
 ## Remote interactive installation (AchLinux/Manjaro, Debian/Ubuntu)
 
 ```
-$ bash -c "$(curl -s https://gitlab.com/josebamartos/ost/-/raw/master/installer/remote-install.sh)"
+$ bash -c "$(curl -s https://gitlab.com/josebamartos/otzarri-devops/-/raw/master/installer/remote-install.sh)"
 ```
 
 ## Remote unattended installation (AchLinux/Manjaro, Debian/Ubuntu)
@@ -13,7 +13,14 @@ $ bash -c "$(curl -s https://gitlab.com/josebamartos/ost/-/raw/master/installer/
 To force the script to overwrite the existing configuration files:
 
 ```
-$ bash -c "$(curl -s https://gitlab.com/josebamartos/ost/-/raw/master/installer/remote-install.sh)"
+$ curl -s https://gitlab.com/josebamartos/otzarri-devops/-/raw/master/installer/remote-install.sh | bash -s overwrite-config
+```
+
+## Local installation
+
+```
+$ git clone git@gitlab.com:josebamartos/otzarri-devops.git
+$ otzarri-devops/installer/install.sh
 ```
 
 ## Uninstallation
