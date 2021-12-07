@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+action="${1}"
 
 rd=$(realpath $(dirname "${0}")/..)  # Root dir
 bin_src="${rd}/bin"
@@ -6,6 +7,8 @@ bin_dst="${HOME}/.local/bin"
 cfg_src="${rd}/config"
 cfg_dst="${HOME}/.config/ost"
 file_list="${cfg_dst}/.installed-files.list"
+
+if [[ "${action}" == 'overwrite-config' ]]; then rm_cfg='y'; fi
 
 check_dir() {
     dir="${1}"
@@ -51,7 +54,7 @@ function copy_dir_content() {
     done
 }
 
-echo -e "\n[INFO] Installing OST"
+echo -e "\n[INFO] Installing otzarri-devops"
 
 if [[ -f ${file_list} ]]; then
     if grep -Fq "${cfg_dst}" "${file_list}" 2> /dev/null; then
@@ -65,5 +68,5 @@ check_dir "${bin_dst}" "create"
 check_dir "${cfg_dst}" "create"
 copy_dir_content "${bin_src}" "${bin_dst}" "y"
 copy_dir_content "${cfg_src}" "${cfg_dst}" "${rm_cfg}"
-copy_file "${rd}/installer/uninstall.sh" "${bin_dst}/ost-uninstall" "y"
+copy_file "${rd}/installer/uninstall.sh" "${bin_dst}/otzarri-devops-uninstall" "y"
 echo -e "[INFO] Installation completed\n"

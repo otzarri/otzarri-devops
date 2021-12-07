@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+action="${1}"
 
 rd=$(realpath $(dirname "${0}")/..)  # Root dir
 bin_src="${rd}/bin"
@@ -7,6 +8,8 @@ cfg_src="${rd}/config"
 cfg_dst="${HOME}/.config/ost"
 file_list="${cfg_dst}/.installed-files.list"
 
+if [[ "${action}" == 'delete-config' ]]; then rm_cfg='y'; fi
+
 delete_file() {
     file="${1}"
     echo "[DELETE] ${file}"
@@ -14,7 +17,7 @@ delete_file() {
     sed -i "\|${file}|d" "${file_list}" 2> /dev/null
 }
 
-echo -e "\n[INFO] Uninstalling OST"
+echo -e "\n[INFO] Uninstalling otzarri-devops"
 
 if [[ ! -f "${file_list}" ]]; then
     echo "Missing ${file_list} file."
