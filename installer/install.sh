@@ -49,7 +49,12 @@ function copy_dir_content() {
     overwrite="${3}"
 
     for src_file in "${src_dir}"/*; do
-        dst_file="${dst_dir}/$(basename ${src_file})"
+        if [[ "${src_dir}" ==  "${bin_src}" ]]; then
+            # Remove extension to the files installed from bin dir
+            dst_file="${dst_dir}/$(basename ${src_file%.*})"
+        else
+            dst_file="${dst_dir}/$(basename ${src_file})"
+        fi
         copy_file "${src_file}" "${dst_file}" "${overwrite}"
     done
 }

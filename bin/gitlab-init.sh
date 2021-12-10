@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 _sn="$(basename $0)"               # Script name
-_cf="${_sn}.cfg"                   # Script's config file
+_cf="${HOME}/.config/otzarri-devops/gitlab-init.cfg"                   # Script's config file
 _wd="$(realpath $(dirname ${0}))"  # Script's working dir
 
 gitlab-init() {
@@ -22,7 +22,7 @@ gitlab-init() {
     git remote add origin ${uri}.git; echo
 }
 
-. ${_wd}/${_cf}
+. ${_cf}
 
 ns=""
 while [[ "${ns}" == "" ]]; do
