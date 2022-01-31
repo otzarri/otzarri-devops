@@ -4,7 +4,7 @@ _cf="${HOME}/.config/otzarri-devops/gitlab-init.cfg"                   # Script'
 _wd="$(realpath $(dirname ${0}))"  # Script's working dir
 
 gitlab-init() {
-    host="${1}"; ns="${2}"; user="${3}"; email="${4}"
+    host="${1}"; ns="${2}"; branch="${3}" user="${4}"; email="${5}"
     repo="$(basename ${PWD})"
     uri="${host}:${ns}/${repo}.git"
 
@@ -13,12 +13,12 @@ gitlab-init() {
 
     echo "Create repo ${uri}?"
     read -n 1 -s -r -p "Press any key to continue or Ctl+c to quit"; echo -e "\n"
-    git init
+    git init -b ${branch}
     git config user.name "${user}"
     git config user.email "${email}"
     git add .; echo
     git commit -m "Initial commit"; echo
-    git push --set-upstream ${uri} master; echo
+    git push --set-upstream ${uri} ${branch}; echo
     git remote add origin ${uri}.git; echo
 }
 
@@ -30,4 +30,4 @@ while [[ "${ns}" == "" ]]; do
     if [[ "${ns}" == "" ]]; then ns="${def_ns}"; fi
 done
 
-gitlab-init "${host}" "${ns}" "${user}" "${email}"
+gitlab-init "${host}" "${ns}" "${branch}" "${user}" "${email}
