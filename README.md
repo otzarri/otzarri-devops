@@ -33,6 +33,8 @@ $ otzarri-devops-uninstall
 
 Tools are in [bin](bin) director and their respective config files are in [config](config) directory.
 
-| Tool                            | Config                                    | Description                                                                     |
-| ------------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------- |
-| [gitlab-init](bin/gitlab-init)  | [gitlab-init.cfg](config/gitlab-init.cfg) | Initializes git into current directory and pushes it to a new project in GitLab |
+| Tool                               | Config                                          | Description                                                                     |
+| ---------------------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------- |
+| [gitlab-init](bin/gitlab-init.sh)  | [gitlab-init.cfg](config/gitlab-init.cfg)       | Initializes git into current directory and pushes it to a new project in GitLab |
+| [git-mvbranch](bin/gitlab-init.sh) |                                                 | Rename a git branch                                                             |
+| [git-id](bin/git-id.sh)            | [git-identities.yaml](config/git-identities.sh) | Manage local user.name and user.email of a git repository                       |
